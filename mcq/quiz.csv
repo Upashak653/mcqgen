@@ -1,0 +1,4 @@
+MCQ,Options,Correct Answer
+What is the main goal of supervised learning?,a: To discover hidden patterns in data | b: To interact with a dynamic environment | c: To learn a general rule that maps inputs to outputs | d: To perform a certain goal like playing a game,c
+Which learning paradigm involves the algorithm finding structure in its input without given labels?,a: Supervised learning | b: Unsupervised learning | c: Reinforcement learning | d: None of the above,b
+In which learning approach does a program receive feedback similar to rewards?,a: Supervised learning | b: Unsupervised learning | c: Reinforcement learning | d: None of the above,c
