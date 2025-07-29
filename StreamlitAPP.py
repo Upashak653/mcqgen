@@ -5,25 +5,20 @@ import traceback
 import pandas as pd
 import streamlit as st
 from dotenv import load_dotenv
-import ast  # ✅ Needed to safely parse Python-like dict
+import ast  
 
-# ✅ Set up import path early
 sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 
-# ✅ Import after fixing sys.path
 from mcqgenerator.logger import logging
 from mcqgenerator.utils import read_file, get_data
 from mcqgenerator.MCQ_Generator import generate_evaluate_chain
 from langchain.callbacks import get_openai_callback
 
-# ✅ Load environment variables
 load_dotenv()
 
-# ✅ Load JSON config
 with open(r'C:\Users\UPASHAK GAYEN\OneDrive\Desktop\mcqgen\Response.json', 'r') as file:
     RESPONSE_JSON = json.load(file)
 
-# ✅ Streamlit UI
 st.title("MCQ Generator Application with LangChain")
 
 with st.form("user_inputs"):
@@ -46,20 +41,18 @@ with st.form("user_inputs"):
                         "response_json": json.dumps(RESPONSE_JSON)
                     })
 
-                # ✅ Show token usage
                 st.text(f"Total tokens used: {cb.total_tokens}")
                 st.text(f"Prompt tokens used: {cb.prompt_tokens}")
                 st.text(f"Completion tokens used: {cb.completion_tokens}")
                 st.text(f"Total cost: ${cb.total_cost:.4f}")
 
-                # ✅ Handle response and quiz display
                 if isinstance(response, dict):
                     quiz_raw = response.get("quiz")
                     st.write("🔍 Full response:", response)
                     if quiz_raw and "RESPONSE_JSON" in quiz_raw:
                         quiz_str = quiz_raw.replace("###RESPONE_JSON", "").strip()
                         try:
-                            parsed_quiz = ast.literal_eval(quiz_str)  # ✅ Convert string to dict
+                            parsed_quiz = ast.literal_eval(quiz_str)  
                             table_data = get_data(parsed_quiz)
                             if table_data:
                                 df = pd.DataFrame(table_data)
